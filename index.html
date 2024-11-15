@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- <meta name="description" content="LLMs Meet Misinformation"> -->
+  <meta name="keywords" content="LLM, Large Language Model, LLM, LLM Safety, Knowledge Editing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editing LLMs</title>
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<!-- <meta name="generator" content="Jekyll v3.9.3" /> -->
+<meta property="og:title" content="Editing LLMs" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://llm-editing.github.io" />
+<meta property="og:url" content="https://llm-editing.github.io/" />
+<meta property="og:site_name" content="Editing LLMs" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://llm-editing.github.io/static/images/logo_1.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Editing LLMs" />
+<meta name="twitter:description" content="Editing LLMs" />
+<meta name="twitter:site" content="@CanyuChen3" />
+<meta name="twitter:image" content="https://llm-editing.github.io/static/images/logo_1.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","headline":"Editing LLMs","name":"Editing LLMs","url":"https://llm-editing.github.io/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/icon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Carousel</title>
+<style>
+  .carousel-container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .caption {
+    text-align: center;
+    padding: 5px;
+    background-color: #ddd;
+  }
+
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    padding: 10px;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+</style>
+<style>
+  .author-block, .institution-block {
+    position: relative;
+    display: inline-block;
+  }
+
+  .author-block sup, .institution-block sup {
+    font-size: smaller;
+    top: -0.6em;
+  }
+
+  /* 可选：添加额外的样式以美化或符合您的页面设计 */
+  .publication-authors a, .publication-authors span {
+    margin-right: 5px;
+  }
+
+  .dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+
+  .carousel-dots {
+    text-align: center;
+  }
+
+</style>
+</head>
+
+<body>
+
+<script>
+function toggleFinding(id) {
+  var content = document.getElementById(id);
+  var icon = document.getElementById('icon-' + id);
+  if (content.style.display === "none") {
+    content.style.display = "block";
+    icon.classList.remove('fa-chevron-down');
+    icon.classList.add('fa-chevron-up');
+  } else {
+    content.style.display = "none";
+    icon.classList.remove('fa-chevron-up');
+    icon.classList.add('fa-chevron-down');
+  }
+}
+</script>
+
+<style>
+.finding-toggle {
+  margin-bottom: 1rem;
+}
+.finding-content {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+.button .icon {
+  margin-left: 0.5em;
+}
+.button.is-fullwidth {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
+
+
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- <img src="./static/images/logo_4.png" class="header-image" style="max-width:4cm; height: auto; vertical-align: middle; margin-right: 10px;"> -->
+            <h1 id="Can-Editing-LLMs-Inject-Harm" class="title is-1 publication-title">ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?</h1>
+            <h1 id="Can-Editing-LLMs-Inject-Harm" class="is-size-5 publication-title">TLDR: We discover that both general-purpose and medical LLMs, even with different model scales, diverse prompting or fine-tuning strategies, <b>still cannot beat traditional ML models in clinical prediction yet</b>, shedding light on their <b><i>potential deficiency in clinical reasoning and decision-making</i></b>.</h1>
+              <br>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://canyuchen.com" target="_blank">Canyu Chen<sup>*1</sup></a>,</span>
+                <span class="author-block">
+                  Jian Yu<sup>*</sup>,</span>
+                <span class="author-block">
+                  <a href="https://shanchen.dev/" target="_blank">Shan Chen<sup>3</sup></a>,</span>
+                <span class="author-block">
+                  <a href="https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&hl=zh-CN&user=HED_458AAAAJ&sortby=pubdate" target="_blank">Che Liu<sup>5</sup></a>,</span>
+                <span class="author-block">
+                  <a href="https://scholar.google.com/citations?hl=zh-CN&user=EVj1cNoAAAAJ&view_op=list_works" target="_blank">Zhongwei Wan<sup>6</sup></a>,</span>
+                <span class="author-block">
+                  <a href="https://www.bittermanlab.org/" target="_blank">Danielle S. Bitterman<sup>3</sup></a>,</span>
+                <span class="author-block">
+                  <a href="https://wcm-wanglab.github.io/" target="_blank">Fei Wang<sup>4</sup></a>,</span>
+                <span class="author-block">
+                  <a href="https://www.cs.emory.edu/~kshu5/" target="_blank">Kai Shu<sup>2</sup></a></span>
+              </div>
+              <div class="is-size-5 publication-institutions">
+                <span class="institution-block">1. Illinois Institute of Technology</span>
+                <span class="institution-block">2. Emory University</span>
+                <span class="institution-block">3. Mass General Brigham & Boston Children’s Hospital, Harvard Medical School</span>
+                <span class="institution-block">4. Weill Cornell Medicine, Cornell University</span>
+                <span class="institution-block">5. Imperial College London</span>
+                <span class="institution-block">6. Ohio State University</span>
+              </div>
+              <div>
+                <span class="is-size-6">* Equal contribution</span>
+              </div>              
+            <!-- <br> -->
+            <!-- Publication links -->
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2411.06469" target="_blank" class="external-link button is-normal is-rounded is-dark">                 
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2411.06469" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- <span class="link-block">
+                  <a href="https://drive.google.com/file/d/1pUkoDYDxeWl4nhCy74jaDIhxBW7_Sy4g/view?usp=sharing" target="_blank" class="external-link button is-normal is-rounded is-dark">                 
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Poster</span>
+                  </a>
+                </span> -->
+                <span class="link-block">
+                  <a href="https://github.com/canyuchen/ClinicalBench" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code and Results</span>
+                    </a>
+                </span>
+                <!-- <br> -->
+                <!-- <span class="link-block">
+                  <a href="https://zhuanlan.zhihu.com/p/678425256"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-zhihu"></i>
+                    </span>
+                    <span>post</span>
+                    </a>
+                </span> -->
+                <!-- <span class="link-block">
+                  <a href="https://x.com/CanyuChen3/status/1820485384083566804"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-twitter"></i>
+                    </span>
+                    <span>post</span>
+                    </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://www.linkedin.com/posts/canyu-chen-1b2415100_misinformation-llm-llmsecurity-activity-7226266335289229314-xcm-?utm_source=share&utm_medium=member_desktop"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-linkedin"></i>
+                    </span>
+                    <span>post</span>
+                    </a>
+                </span> -->
+              </div>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"> Presented in  <em><strong><a href="https://pittnail.github.io/AMIANLP2024/" target="_blank" style="text-decoration:none"><font color="#494e52">AMIA NLP Working Group Pre-Symposium 2024</font></a>, <font color="red">Oral</font></strong></em> and <em><strong><a href="https://genai4health.github.io/" target="_blank" style="text-decoration:none"><font color="#494e52">GenAI4Health@NeurIPS 2024</font></a></strong></em>.</span>
+              <!-- <br /> <strong><font color="red">🏆 Award:</font> <a href="https://rdi.berkeley.edu/events/decentralizationaisummit24" style="text-decoration:none"><font color="red">Research Spotlight</font></a>
+            </strong> in <i><a href="https://rdi.berkeley.edu/events/decentralizationaisummit24" style="text-decoration:none"><font color="#494e52">The 2024 Summit on Responsible Decentralized Intelligence —— Future of Decentralization and AI</font></a></i>, 
+            hosted by <a href="https://rdi.berkeley.edu/" style="text-decoration:none"><font color="#494e52">The Berkeley Center for Responsible, Decentralized Intelligence</font></a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+
+    <div class="container is-max-desktop" style="text-align: center;">
+      <figure style="display: inline-block;">
+        <img src="static/images/framework.png" alt="framework" style="max-width: 100%; height: auto;">
+        <figcaption><strong>Framework of ClinicalBench.</strong></figcaption>
+      </figure>
+    </div>
+    <!-- <div class="container is-max-desktop" style="text-align: center;">
+      <figure style="display: inline-block;">
+        <img src="static/images/framework.png" alt="framework" style="max-width: 100%; height: auto;">
+        <figcaption><strong>The Illustration of Editing Attack for Misinformation Injection and Bias Injection</strong>. 
+          As for <em>misinformation injection</em>, editing attack can inject commonsense misinformation with high effectiveness. 
+          As for <em>bias injection</em>, one single editing attack can subvert the overall fairness.</figcaption>
+      </figure>
+    </div> -->
+    <br><br>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>Large Language Models (LLMs) hold great promise to revolutionize current clinical systems due to their superior capabilities in medical text processing tasks and medical licensing exams. However, traditional machine learning (ML) models such as SVM and XGBoost remain predominantly used in clinical prediction tasks. This raises the question: <em>Can LLMs outperform traditional ML models in clinical prediction?</em> To address this, we introduce ClinicalBench, a new benchmark designed to comprehensively evaluate the clinical predictive modeling capabilities of both general-purpose and medical LLMs, comparing them to traditional ML models. ClinicalBench includes three common clinical prediction tasks, two databases, 14 general-purpose LLMs, 8 medical LLMs, and 11 traditional ML models. Our extensive empirical investigations reveal that <strong>both general-purpose and medical LLMs, regardless of model scale or diverse prompting and fine-tuning strategies, are still unable to surpass traditional ML models in clinical prediction tasks</strong>, highlighting potential deficiencies in clinical reasoning and decision-making. We urge practitioners to exercise caution when adopting LLMs in clinical applications. ClinicalBench aims to bridge the gap between LLM development for healthcare and real-world clinical practice.</p>                  
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </section>
+  <section class="section"> -->
+    <!-- <br>
+    <br>
+    <div class="container is-max-desktop">
+      <figure>
+        <img src="static/images/framework.png" alt="survey">
+      </figure>
+    </div> -->
+  <!-- </section> -->
+  <!-- </section>
+  <section class="section"> -->
+    <br>
+    <br>
+    <div class="container is-max-desktop">
+      <!-- Method -->
+      <!-- <br /> -->
+      <div style="text-align:center">
+        <h2 class="title is-3">Our Contributions</h2>
+      </div>
+      <div class="content has-text-justified">
+        <br>
+        <ul style="margin-left: 0;">
+          <li>We built a new benchmark <strong>ClinicalBench</strong>, embracing 14 general-purpose LLMs, 8 medical LLMs, 11 traditional ML models, three tasks, and two databases, which made the first attempt to compare the clinical prediction capacities of LLMs and traditional ML models in a head-to-head way.</li>
+          <li>We discover that both general-purpose and medical LLMs, even with different model sizes, prompting or fine-tuning strategies, still cannot beat traditional ML models in clinical prediction yet.</li>
+          <li>Our findings demonstrate <strong>the potential deficiency of both general-purpose and medical LLMs in real-world clinical reasoning and decision-making</strong>, which could have almost clinician-level performance in medical licensing exams and clinical case challenges. We call for caution when adopting LLMs in practical clinical applications. ClinicalBench could be leveraged to bridge the gap between the development of LLMs for healthcare and real-world clinical practice.</li>
+      </ul>
+        <br>
+  </section>
+  <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{chen2024clinicalbench,
+      title   = {ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?},
+      author  = {Canyu Chen and Jian Yu and Shan Chen and Che Liu and Zhongwei Wan and Danielle Bitterman and Fei Wang and Kai Shu},
+      year    = {2024},
+      journal = {arXiv preprint arXiv: 2411.06469}
+    }</code></pre>
+  </div>
+</section>
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                code</a> of this website,
+              we just ask that you link back to this page in the footer.
+              Please remember to remove the analytics code included in the header of the website which
+              you do not want on your website.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+<!-- <script>
+  let slideIndexes = { 'carousel1': 1, 'carousel2': 1 };
+  
+  function moveSlide(n, carouselId) {
+    let slides = document.querySelector('#' + carouselId + ' .carousel-inner').getElementsByClassName("carousel-item");
+    slideIndexes[carouselId] += n;
+    if (slideIndexes[carouselId] > slides.length) {slideIndexes[carouselId] = 1}
+    if (slideIndexes[carouselId] < 1) {slideIndexes[carouselId] = slides.length}
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slides[slideIndexes[carouselId] - 1].style.display = "block";
+  }
+  
+  // Initial display
+  document.addEventListener('DOMContentLoaded', function() {
+    moveSlide(0, 'carousel1');
+    moveSlide(0, 'carousel2');
+  });
+</script> -->
+
+<!-- Default Statcounter code for llm-editing
+https://llm-editing.github.io/ -->
+<script type="text/javascript">
+  var sc_project=13021589; 
+  var sc_invisible=1; 
+  var sc_security="137f28b6"; 
+  </script>
+  <script type="text/javascript"
+  src="https://www.statcounter.com/counter/counter.js"
+  async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics"
+  href="https://statcounter.com/" target="_blank"><img
+  class="statcounter"
+  src="https://c.statcounter.com/13021589/0/137f28b6/1/"
+  alt="Web Analytics"
+  referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+  <!-- End of Statcounter Code -->
+
+</body>
+<script>
+  function changeContent() {
+    const dropdown = document.getElementById("dropdown");
+    const selected = dropdown.value;
+    const sections = ["example_1", "example_2", "example_3", "example_4", "example_5", "example_6", "example_7", "example_8", "example_9", "example_10", "example_11", "example_12", "example_13", "example_14"];
+
+    sections.forEach((section) => {
+      document.getElementById(section).style.display = (section === selected) ? "block" : "none";
+    });
+  }
+</script>
+
+
+
+
+</html>
