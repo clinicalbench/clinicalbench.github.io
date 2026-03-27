@@ -1,31 +1,57 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <!-- <meta name="description" content="LLMs Meet Misinformation"> -->
-  <meta name="keywords" content="LLM, Large Language Model, clinicalbench, ai4health, clinical prediction, LLM4health">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ClinicalBench</title>
+  <title>ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?</title>
+  <meta name="description" content="ClinicalBench is a comprehensive benchmark evaluating LLMs versus traditional ML models in clinical prediction tasks. Results show LLMs still cannot surpass traditional ML in clinical reasoning and decision-making.">
+  <meta name="keywords" content="ClinicalBench, LLM, Large Language Model, clinical prediction, machine learning, healthcare AI, medical AI, XGBoost, clinical reasoning, NeurIPS 2024">
 
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<!-- <meta name="generator" content="Jekyll v3.9.3" /> -->
-<meta property="og:title" content="ClinicalBench" />
-<meta property="og:locale" content="en_US" />
-<link rel="canonical" href="https://clinicalbench.github.io" />
-<meta property="og:url" content="https://clinicalbench.github.io/" />
-<meta property="og:site_name" content="ClinicalBench" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="https://clinicalbench.github.io/static/images/logo.png" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="ClinicalBench" />
-<meta name="twitter:description" content="ClinicalBench" />
-<meta name="twitter:site" content="@CanyuChen3" />
-<meta name="twitter:image" content="https://clinicalbench.github.io/static/images/logo.png" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","headline":"ClinicalBench","name":"ClinicalBench","url":"https://clinicalbench.github.io/"}</script>
-<!-- End Jekyll SEO tag -->
+  <!-- Open Graph -->
+  <meta property="og:title" content="ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?">
+  <meta property="og:description" content="A comprehensive benchmark comparing LLMs and traditional ML models in clinical prediction. LLMs still cannot beat traditional ML in clinical reasoning and decision-making.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://clinicalbench.github.io/">
+  <meta property="og:site_name" content="ClinicalBench">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://clinicalbench.github.io/static/images/logo.png">
+  <link rel="canonical" href="https://clinicalbench.github.io/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?">
+  <meta name="twitter:description" content="A comprehensive benchmark comparing LLMs and traditional ML models in clinical prediction. LLMs still cannot beat traditional ML in clinical reasoning.">
+  <meta name="twitter:site" content="@CanyuChen3">
+  <meta name="twitter:image" content="https://clinicalbench.github.io/static/images/logo.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?",
+    "name": "ClinicalBench",
+    "description": "A comprehensive benchmark evaluating LLMs versus traditional ML models in clinical prediction tasks.",
+    "url": "https://clinicalbench.github.io/",
+    "image": "https://clinicalbench.github.io/static/images/logo.png",
+    "datePublished": "2024-11-10",
+    "author": [
+      {"@type": "Person", "name": "Canyu Chen", "url": "https://canyuchen.com", "affiliation": {"@type": "Organization", "name": "Illinois Institute of Technology"}},
+      {"@type": "Person", "name": "Jian Yu", "affiliation": {"@type": "Organization", "name": "Illinois Institute of Technology"}},
+      {"@type": "Person", "name": "Shan Chen", "url": "https://shanchen.dev/", "affiliation": {"@type": "Organization", "name": "Harvard Medical School"}},
+      {"@type": "Person", "name": "Che Liu", "affiliation": {"@type": "Organization", "name": "Imperial College London"}},
+      {"@type": "Person", "name": "Zhongwei Wan", "affiliation": {"@type": "Organization", "name": "Ohio State University"}},
+      {"@type": "Person", "name": "Danielle S. Bitterman", "url": "https://www.bittermanlab.org/", "affiliation": {"@type": "Organization", "name": "Harvard Medical School"}},
+      {"@type": "Person", "name": "Fei Wang", "url": "https://wcm-wanglab.github.io/", "affiliation": {"@type": "Organization", "name": "Cornell University"}},
+      {"@type": "Person", "name": "Kai Shu", "url": "https://www.cs.emory.edu/~kshu5/", "affiliation": {"@type": "Organization", "name": "Emory University"}}
+    ],
+    "publisher": {"@type": "Organization", "name": "arXiv"},
+    "sameAs": "https://arxiv.org/abs/2411.06469",
+    "keywords": ["LLM", "clinical prediction", "machine learning", "healthcare AI", "benchmark"]
+  }
+  </script>
 
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
@@ -40,16 +66,13 @@
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/icon.svg">
+  <link rel="icon" href="./static/images/logo.png" type="image/png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Carousel</title>
 <style>
   .carousel-container {
     position: relative;
@@ -170,9 +193,9 @@ function toggleFinding(id) {
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <img src="./static/images/logo.png" class="header-image" style="max-width:4cm; height: auto; vertical-align: middle; margin-right: 10px;">
+            <img src="./static/images/logo.png" class="header-image" alt="ClinicalBench logo" style="max-width:4cm; height: auto; vertical-align: middle; margin-right: 10px;">
             <h1 id="clinicalbench" class="title is-1 publication-title">ClinicalBench: Can LLMs Beat Traditional ML Models in Clinical Prediction?</h1>
-            <h1 id="clinicalbench" class="is-size-5 publication-title">TLDR: We discover that both general-purpose and medical LLMs, even with different model scales, diverse prompting or fine-tuning strategies, <b>still cannot beat traditional ML models in clinical prediction yet</b>, shedding light on their <b><i>potential deficiency in clinical reasoning and decision-making</i></b>.</h1>
+            <h2 class="is-size-5 publication-title">TLDR: We discover that both general-purpose and medical LLMs, even with different model scales, diverse prompting or fine-tuning strategies, <b>still cannot beat traditional ML models in clinical prediction yet</b>, shedding light on their <b><i>potential deficiency in clinical reasoning and decision-making</i></b>.</h2>
               <br>
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
@@ -285,7 +308,7 @@ function toggleFinding(id) {
 
     <div class="container is-max-desktop" style="text-align: center;">
       <figure style="display: inline-block;">
-        <img src="static/images/framework.png" alt="framework" style="max-width: 100%; height: auto;">
+        <img src="static/images/framework.png" alt="ClinicalBench framework: comparing LLMs and traditional ML models across clinical prediction tasks including mortality, readmission, and length-of-stay prediction" style="max-width: 100%; height: auto;">
         <figcaption><strong>Framework of ClinicalBench.</strong></figcaption>
       </figure>
     </div>
@@ -351,7 +374,7 @@ function toggleFinding(id) {
           <div class="content">
             <p>
               This website is licensed under a <a rel="license"
-                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                href="https://creativecommons.org/licenses/by-sa/4.0/">Creative
                 Commons Attribution-ShareAlike 4.0 International License</a>.
             </p>
             <p>
